@@ -70,10 +70,12 @@ export default function Home() {
         setGasLimit(result.gasLimit);
         setVolume(result.volume);
         setTps(result.tps);
-        setLatestTxs(result.transactions.map(tx => ({
-          hash: tx.hash,
-          value: tx.value
-        })));
+        setLatestTxs(
+          result.transactions.map((tx: { hash: string; value: number }) => ({
+            hash: tx.hash,
+            value: tx.value,
+          }))
+        );
 
         const prevNftsTot = (Object.values(result.previousCounts.nftsCount) as number[]).reduce((sum, val) => sum + val, 0);
         const prevDefiTot =
