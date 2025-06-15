@@ -37,7 +37,7 @@ const categoryData = [
   },
 ];
 
-function safePercentChange(current, prev) {
+function safePercentChange(current: number, prev: number): number {
   return prev === 0 ? 0 : Number(((current - prev) / prev).toFixed(2));
 }
 
