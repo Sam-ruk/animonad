@@ -46,7 +46,7 @@ export default function Home() {
   const [gasUsed, setGasUsed] = useState(null);
   const [gasLimit, setGasLimit] = useState(null);
   const [volume, setVolume] = useState(null);
-  const [tps, setTps] = useState(null);
+  const [tps, setTps] = useState<number>(0);
   const [topDapps, setTopDapps] = useState<[string, number][]>([]);
   const [barTot, setBarTot] = useState(Array(5).fill(0));
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
