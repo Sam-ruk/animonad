@@ -350,8 +350,8 @@ export default function Home() {
                           style={{ height: "32px" }}
                         >
                           <td className="px-2 py-1 border-b border-pink-300/10">
-                            {logos?.[name] ? (
-                              <img src={logos[name]} alt={name} className="w-5 h-5 rounded-lg" />
+                            {logos?.[name as keyof typeof logos] ? (
+                              <img src={logos[name as keyof typeof logos]} alt={name} className="w-5 h-5 rounded-lg" />
                             ) : (
                               <span className="text-pink-300 text-xs">N/A</span>
                             )}
