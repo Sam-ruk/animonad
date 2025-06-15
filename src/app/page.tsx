@@ -50,7 +50,7 @@ export default function Home() {
   const [topDapps, setTopDapps] = useState<[string, number][]>([]);
   const [barTot, setBarTot] = useState(Array(5).fill(0));
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
-  const [latestTxs, setLatestTxs] = useState(null);
+  const [latestTxs, setLatestTxs] = useState<Array<Pick<typeof result.transactions[number], 'hash' | 'value'>>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -397,7 +397,7 @@ export default function Home() {
                         <tr
                           key={idx}
                           className="hover:bg-purple-700/10 transition-all duration-150"
-                          style={{ height: "32px" }} 
+                          style={{ height: "32px" }}
                         >
                           <td className="px-2 py-1 border-b border-purple-300/10 truncate">
                             <a
