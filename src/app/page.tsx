@@ -51,7 +51,6 @@ export default function Home() {
   const [barTot, setBarTot] = useState(Array(5).fill(0));
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
   const [latestTxs, setLatestTxs] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,7 +103,6 @@ export default function Home() {
 
       } catch (err) {
         console.error('Fetch error:', err);
-        setError(err.message);
       }
     };
 
