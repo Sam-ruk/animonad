@@ -357,18 +357,19 @@ export default function Home() {
                             )}
                           </td>
                           <td className="px-2 py-1 border-b border-pink-300/10 truncate">
-                            {urls?.[name] ? (
+                            {urls?.[name as keyof typeof urls] ? (
                               <a
-                                href={urls[name]}
+                                href={urls[name as keyof typeof urls]}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="hover:text-pink-300 block truncate"
+                                className="text-blue-400 underline"
                               >
-                                {name}
+                                Visit
                               </a>
                             ) : (
-                              <span className="text-pink-300 truncate block">{name}</span>
+                              <span className="text-pink-300 text-xs">N/A</span>
                             )}
+
                           </td>
                           <td className="px-2 py-1 border-b border-pink-300/10 text-right">
                             {tps}
