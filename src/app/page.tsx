@@ -103,8 +103,9 @@ export default function Home() {
           Object.entries(combined).sort(([, a], [, b]) => (b as number) - (a as number))
         );
 
-        const top = Object.entries(sortedCombined).slice(0, 13);
+        const top = Object.entries(sortedCombined).slice(0, 13) as [string, number][];
         setTopDapps(top);
+
 
       } catch (err) {
         console.error('Fetch error:', err);
