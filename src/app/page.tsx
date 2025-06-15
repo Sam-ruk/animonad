@@ -72,16 +72,27 @@ export default function Home() {
         setTps(result.tps);
         setLatestTxs(result.transactions);
 
-        const prevNftsTot = Object.values(result.previousCounts.nftsCount).reduce((sum, val) => sum + val, 0);
-        const prevDefiTot = Object.values(result.previousCounts.defiCount).reduce((sum, val) => sum + val, 0) + Object.values(result.previousCounts.defiTokensCount).reduce((sum, val) => sum + val, 0);
-        const prevGamingTot = Object.values(result.previousCounts.gamingCount).reduce((sum, val) => sum + val, 0);
-        const prevSocialTot = Object.values(result.previousCounts.socialCount).reduce((sum, val) => sum + val, 0);
-        const prevOthersTot = result.previousCounts.tps - prevNftsTot - prevDefiTot - prevGamingTot - prevSocialTot;
+        const prevNftsTot = Object.values(result.previousCounts.nftsCount).reduce(
+          (sum, val: number) => sum + val,0);
+        const prevDefiTot =
+          Object.values(result.previousCounts.defiCount).reduce((sum, val: number) => sum + val, 0) +
+          Object.values(result.previousCounts.defiTokensCount).reduce((sum, val: number) => sum + val, 0);
+        const prevGamingTot = Object.values(result.previousCounts.gamingCount).reduce(
+          (sum, val: number) => sum + val,0);
+        const prevSocialTot = Object.values(result.previousCounts.socialCount).reduce(
+          (sum, val: number) => sum + val,0);
+        const prevOthersTot =
+          result.previousCounts.tps - prevNftsTot - prevDefiTot - prevGamingTot - prevSocialTot;
 
-        const nftsTot = Object.values(result.nftsCount).reduce((sum, val) => sum + val, 0);
-        const defiTot = Object.values(result.defiCount).reduce((sum, val) => sum + val, 0) + Object.values(result.defiTokensCount).reduce((sum, val) => sum + val, 0);
-        const gamingTot = Object.values(result.gamingCount).reduce((sum, val) => sum + val, 0);
-        const socialTot = Object.values(result.socialCount).reduce((sum, val) => sum + val, 0);
+        const nftsTot = Object.values(result.nftsCount).reduce(
+          (sum, val: number) => sum + val,0);
+        const defiTot =
+          Object.values(result.defiCount).reduce((sum, val: number) => sum + val, 0) +
+          Object.values(result.defiTokensCount).reduce((sum, val: number) => sum + val, 0);
+        const gamingTot = Object.values(result.gamingCount).reduce(
+          (sum, val: number) => sum + val,0);
+        const socialTot = Object.values(result.socialCount).reduce(
+          (sum, val: number) => sum + val,0);
         const othersTot = result.tps - nftsTot - gamingTot - socialTot - defiTot;
 
         const changes = [
