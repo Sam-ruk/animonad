@@ -100,8 +100,9 @@ export default function Home() {
 
         const combined = { ...result.nftsCount, ...result.defiCount, ...result.gamingCount, ...result.socialCount};
         const sortedCombined = Object.fromEntries(
-          Object.entries(combined).sort(([, a], [, b]) => b - a)
+          Object.entries(combined).sort(([, a], [, b]) => (b as number) - (a as number))
         );
+
         const top = Object.entries(sortedCombined).slice(0, 13);
         setTopDapps(top);
 
