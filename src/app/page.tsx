@@ -50,7 +50,7 @@ export default function Home() {
   const [topDapps, setTopDapps] = useState<[string, number][]>([]);
   const [barTot, setBarTot] = useState(Array(5).fill(0));
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
-  const [latestTxs, setLatestTxs] = useState<Array<Pick<typeof result.transactions[number], 'hash' | 'value'>>>([]);
+  const [latestTxs, setLatestTxs] = useState<{ hash: string; value: number }[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +70,10 @@ export default function Home() {
         setGasLimit(result.gasLimit);
         setVolume(result.volume);
         setTps(result.tps);
-        setLatestTxs(result.transactions);
+        setLatestTxs(result.transactions.map(tx => ({
+          hash: tx.hash,
+          value: tx.value
+        })));
 
         const prevNftsTot = (Object.values(result.previousCounts.nftsCount) as number[]).reduce((sum, val) => sum + val, 0);
         const prevDefiTot =
