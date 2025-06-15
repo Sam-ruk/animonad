@@ -476,7 +476,9 @@ const AudioManager = ({ maxIndex }: { maxIndex: number }) => {
         <audio
           key={idx}
           src={src}
-          ref={(el) => (audioRefs.current[idx] = el!)}
+          ref={(el) => {
+            if (el) audioRefs.current[idx] = el;
+          }}
           preload="auto"
         />
       ))}
