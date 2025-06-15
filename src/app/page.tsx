@@ -72,25 +72,6 @@ export default function Home() {
         setTps(result.tps);
         setLatestTxs(result.transactions);
 
-        type CountMap = Record<string, number>;
-
-        type Result = {
-          tps: number;
-          nftsCount: CountMap;
-          defiCount: CountMap;
-          defiTokensCount: CountMap;
-          gamingCount: CountMap;
-          socialCount: CountMap;
-          previousCounts: {
-            tps: number;
-            nftsCount: CountMap;
-            defiCount: CountMap;
-            defiTokensCount: CountMap;
-            gamingCount: CountMap;
-            socialCount: CountMap;
-          };
-        };
-
         const prevNftsTot = (Object.values(result.previousCounts.nftsCount) as number[]).reduce((sum, val) => sum + val, 0);
         const prevDefiTot =
           (Object.values(result.previousCounts.defiCount) as number[]).reduce((sum, val) => sum + val, 0) +
