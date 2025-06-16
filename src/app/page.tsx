@@ -369,7 +369,7 @@ export default function Home() {
                                 rel="noopener noreferrer"
                                 className="text-blue-400 underline"
                               >
-                                Visit
+                                {name}
                               </a>
                             ) : (
                               <span className="text-pink-300 text-xs">N/A</span>
