@@ -367,7 +367,6 @@ export default function Home() {
                                 href={urls[name as keyof typeof urls]}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-blue-400 underline"
                               >
                                 {name}
                               </a>
