@@ -337,7 +337,7 @@ export default function Home() {
 
               {/* Top dApps */}
               <div className="flex flex-col h-full overflow-hidden min-h-0 bg-gradient-to-br from-pink-900/60 via-purple-900/70 to-black/80 p-3 rounded-xl shadow-[0_0_15px_#9333ea80] border border-pink-300/10 backdrop-blur text-xs">
-                <h2 className="text-white text-lg font-semibold mb-2 shrink-0">💻&nbsp; Top&nbsp; 10&nbsp; dApps</h2>
+                <h2 className="text-white text-lg font-semibold mb-2 shrink-0">💻&nbsp; Most&nbsp; used&nbsp; dApps</h2>
                 <div className="flex-1 overflow-hidden min-h-0 relative">
                   <table className="w-full table-fixed text-white text-xs border-separate border-spacing-0">
                     <thead>

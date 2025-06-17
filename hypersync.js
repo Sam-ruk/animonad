@@ -35,7 +35,7 @@ async function getData() {
   const query = {
     fromBlock: height-1,
     toBlock: height+1,
-    transactions: [{}],
+    transactions: [{ status: 1 }],
     logs: [{}],
     fieldSelection: {
       block: [ BlockField.Number, BlockField.Timestamp, BlockField.GasUsed, BlockField.GasLimit, BlockField.Hash ],
