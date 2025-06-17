@@ -7,32 +7,32 @@ const urls = {'Magic Eden': 'https://magiceden.io/monad-testnet','Poply': 'https
 const categoryData = [
   {
     label: "NFT",
-    happyImg: "/happy_chog.png",
-    sadImg: "/sad_chog.png",
+    happyImg: "/monanimals/happy_chog.png",
+    sadImg: "/monanimals/sad_chog.png",
     gradient: "from-pink-500 to-pink-300",
   },
   {
     label: "DeFi",
-    happyImg: "/happy_salmonad.png",
-    sadImg: "/sad_salmonad.png",
+    happyImg: "/monanimals/happy_salmonad.png",
+    sadImg: "/monanimals/sad_salmonad.png",
     gradient: "from-cyan-500 to-cyan-300",
   },
   {
     label: "Gaming",
-    happyImg: "/happy_moyaki.png",
-    sadImg: "/sad_moyaki.png",
+    happyImg: "/monanimals/happy_moyaki.png",
+    sadImg: "/monanimals/sad_moyaki.png",
     gradient: "from-green-400 to-lime-300",
   },
   {
     label: "Social",
-    happyImg: "/happy_molandak.png",
-    sadImg: "/sad_molandak.png",
+    happyImg: "/monanimals/happy_molandak.png",
+    sadImg: "/monanimals/sad_molandak.png",
     gradient: "from-purple-500 to-violet-300",
   },
   {
     label: "Others",
-    happyImg: "/happy_mosferatu.png",
-    sadImg: "/sad_mosferatu.png",
+    happyImg: "/monanimals/happy_mosferatu.png",
+    sadImg: "/monanimals/sad_mosferatu.png",
     gradient: "from-yellow-400 to-amber-200",
   },
 ];
@@ -143,7 +143,7 @@ export default function Home() {
           A N I M O N A&nbsp;  
           <span className="relative w-[3rem] h-[3rem] inline-block align-middle ml-2">
             <img
-              src="cool_salmonad.png"
+              src="/monanimals/cool_salmonad.png"
               alt="D"
               className="absolute inset-0 object-contain w-full h-full animate-bounce drop-shadow-[0_0_10px_rgba(200,0,255,0.7)]"
             />
