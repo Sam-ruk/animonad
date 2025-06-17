@@ -59,7 +59,7 @@ export default function Home() {
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
   const [latestTxs, setLatestTxs] = useState<{ hash: string; value: string }[]>([]);
   const [isPlaying, setIsPlaying] = useState(true);
-  const audioRefs = useRef([]);
+  const audioRefs = useRef<HTMLAudioElement[]>([]);
 
    useEffect(() => {
     audioRefs.current = sounds.map((src) => {
