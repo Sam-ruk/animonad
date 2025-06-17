@@ -158,25 +158,25 @@ export default function Home() {
   const maxIndex = maxVal === 0 ? 0 : barTot.findIndex((v) => v === maxVal);
 
   useEffect(() => {
-  if (isPlaying && maxIndex >= 0 && audioRefs.current[maxIndex]) {
-    audioRefs.current.forEach((audio, idx) => {
-      if (audio && idx !== maxIndex) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
-    audioRefs.current[maxIndex].play().catch((error) => {
-      console.error('Audio playback error:', error);
-    });
-  } else {
-    audioRefs.current.forEach((audio) => {
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
-  }
-}, [isPlaying, maxIndex]);
+    if (isPlaying && maxIndex >= 0 && audioRefs.current[maxIndex]) {
+      audioRefs.current.forEach((audio, idx) => {
+        if (audio && idx !== maxIndex) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+      audioRefs.current[maxIndex].play().catch((error) => {
+        console.error('Audio playback error:', error);
+      });
+    } else {
+      audioRefs.current.forEach((audio) => {
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+    }
+  }, [isPlaying, maxIndex]);
 
   return (
   <div className="flex flex-col h-screen w-full bg-black p-4">
@@ -297,9 +297,6 @@ export default function Home() {
           
           {/* Bar Chart */}
           <div className="flex-1 flex flex-col justify-end px-2 pb-4 w-full h-full">
-            
-
-
             {barTot.every(val => val === 0) ? (
               <div className="text-white text-xs flex items-center justify-center w-full h-full">
                 No data available
@@ -361,8 +358,8 @@ export default function Home() {
                   );
                 })}
               </div>
-            )}
-          </div>
+              )}
+            </div>
 
             {/* Caption */}
             <div className="flex-shrink-0 flex justify-between items-center text-xs text-white px-4 py-2">
@@ -494,4 +491,3 @@ export default function Home() {
       </div>
   );
 }
-
