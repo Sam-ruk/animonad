@@ -7,35 +7,42 @@ const urls = {'Magic Eden': 'https://magiceden.io/monad-testnet','Poply': 'https
 const categoryData = [
   {
     label: "NFT",
-    happyImg: "/happy_chog.png",
-    sadImg: "/sad_chog.png",
+    happyImg: "/monanimals/happy_chog.png",
+    sadImg: "/monanimals/sad_chog.png",
     gradient: "from-pink-500 to-pink-300",
+    bgImg: "/monanimals/chog.png"
   },
   {
     label: "DeFi",
-    happyImg: "/happy_salmonad.png",
-    sadImg: "/sad_salmonad.png",
+    happyImg: "/monanimals/happy_salmonad.png",
+    sadImg: "/monanimals/sad_salmonad.png",
     gradient: "from-cyan-500 to-cyan-300",
+    bgImg: "/monanimals/salmonad.png"
   },
   {
     label: "Gaming",
-    happyImg: "/happy_moyaki.png",
-    sadImg: "/sad_moyaki.png",
+    happyImg: "/monanimals/happy_moyaki.png",
+    sadImg: "/monanimals/sad_moyaki.png",
     gradient: "from-green-400 to-lime-300",
+    bgImg: "/monanimals/moyaki.png"
   },
   {
     label: "Social",
-    happyImg: "/happy_molandak.png",
-    sadImg: "/sad_molandak.png",
+    happyImg: "/monanimals/happy_molandak.png",
+    sadImg: "/monanimals/sad_molandak.png",
     gradient: "from-purple-500 to-violet-300",
+    bgImg: "/monanimals/molandak.png"
   },
   {
     label: "Others",
-    happyImg: "/happy_mosferatu.png",
-    sadImg: "/sad_mosferatu.png",
+    happyImg: "/monanimals/happy_mosferatu.png",
+    sadImg: "/monanimals/sad_mosferatu.png",
     gradient: "from-yellow-400 to-amber-200",
+    bgImg: "/monanimals/mosferatu.png"
   },
 ];
+
+const sounds = ["a_2", "d_2", "c_2", "b_2", "e_2"].map((n) => `/sounds/${n}.mp3`);
 
 function safePercentChange(current: number, prev: number): number {
   return prev === 0 ? 0 : Number(((current - prev) / prev).toFixed(2));
@@ -51,6 +58,24 @@ export default function Home() {
   const [barTot, setBarTot] = useState(Array(5).fill(0));
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
   const [latestTxs, setLatestTxs] = useState<{ hash: string; value: string }[]>([]);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRefs = useRef([]);
+
+   useEffect(() => {
+    audioRefs.current = sounds.map((src) => {
+      const audio = new Audio(src);
+      audio.loop = true;
+      return audio;
+    });
+    return () => {
+      audioRefs.current.forEach((audio) => {
+        if (audio) {
+          audio.pause();
+          audio.src = '';
+        }
+      });
+    };
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -130,11 +155,31 @@ export default function Home() {
   };
 
   const maxVal = Math.max(...barTot);
-  const maxIndex = barTot.findIndex((v) => v === maxVal);
+  const maxIndex = maxVal === 0 ? 0 : barTot.findIndex((v) => v === maxVal);
+
+  useEffect(() => {
+  if (isPlaying && maxIndex >= 0 && audioRefs.current[maxIndex]) {
+    audioRefs.current.forEach((audio, idx) => {
+      if (audio && idx !== maxIndex) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+    audioRefs.current[maxIndex].play().catch((error) => {
+      console.error('Audio playback error:', error);
+    });
+  } else {
+    audioRefs.current.forEach((audio) => {
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+    });
+  }
+}, [isPlaying, maxIndex]);
 
   return (
   <div className="flex flex-col h-screen w-full bg-black p-4">
-    <AudioManager maxIndex={maxIndex} />
 
     {/* Header */}
     <div className="w-full mb-1 p-0 bg-black">
@@ -143,7 +188,7 @@ export default function Home() {
           A N I M O N A&nbsp;  
           <span className="relative w-[3rem] h-[3rem] inline-block align-middle ml-2">
             <img
-              src="cool_salmonad.png"
+              src="/monanimals/cool_salmonad.png"
               alt="D"
               className="absolute inset-0 object-contain w-full h-full animate-bounce drop-shadow-[0_0_10px_rgba(200,0,255,0.7)]"
             />
@@ -248,10 +293,17 @@ export default function Home() {
             </a>
           </div>
 
+          <div className="flex-1 flex flex-col justify-end px-2 pb-4 w-full h-full">
+          
           {/* Bar Chart */}
           <div className="flex-1 flex flex-col justify-end px-2 pb-4 w-full h-full">
+            
+
+
             {barTot.every(val => val === 0) ? (
-              <div className="text-white text-xs flex items-center justify-center w-full h-full">No data available</div>
+              <div className="text-white text-xs flex items-center justify-center w-full h-full">
+                No data available
+              </div>
             ) : (
               <div className="flex justify-around items-end w-full h-full">
                 {categoryData.map((item, idx) => {
@@ -261,22 +313,18 @@ export default function Home() {
                   const change = percentageBarChange?.[idx] ?? 0;
                   const isTop = value === maxValue;
 
-                  console.log(
-                    `Bar ${item.label}: value=${value}, maxValue=${maxValue}, heightPercent=${heightPercent}%`
-                  );
-
                   return (
                     <div key={idx} className="flex flex-col items-center w-20 h-full">
                       <div className="relative w-full flex items-end justify-center h-full">
-                        {/* Bar */}
+                        {/* Bar with image background */}
                         <div
-                          className={`w-10 rounded-t-xl bg-gradient-to-t ${item.gradient} transition-all duration-700 ${
+                          className={`w-10 rounded-t-xl bg-cover bg-center transition-all duration-700 ${
                             isTop ? "drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] scale-105" : ""
                           }`}
                           style={{
                             height: `${heightPercent}%`,
                             zIndex: 1,
-                            backgroundImage: `linear-gradient(to top, ${item.gradient.split(" ")[0]}, ${item.gradient.split(" ")[2]})`,
+                            backgroundImage: `url(${item.bgImg})`, 
                           }}
                         />
 
@@ -316,20 +364,27 @@ export default function Home() {
             )}
           </div>
 
-                {/* Caption */}
-                <div className="flex-shrink-0 flex justify-between items-center text-xs text-white px-4 py-2">
-                  <span className="flex-1 text-center font-bold text-lg">🌈 TPS vs Categories</span>
-                  <a
-                    href="https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit?gid=715484899#gid=715484899"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-violet-400 hover:text-violet-300 transition-colors"
-                  >
-                    🔗
-                  </a>
-              </div>
-            </div>
+            {/* Caption */}
+            <div className="flex-shrink-0 flex justify-between items-center text-xs text-white px-4 py-2">
+              <button
+                onClick={() => setIsPlaying((prev) => !prev)}
+                aria-label="Play/Pause"
+              >
+                <img src={isPlaying ? "/sounds/pause.png" : "/sounds/play.png"} alt="Play/Pause" className="w-13 ml-0" />
+              </button>
+              <span className="flex-1 text-center font-bold text-lg">🌈 TPS vs Categories</span>
+              <a
+                href="https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit?gid=715484899#gid=715484899"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-violet-400 hover:text-violet-300 transition-colors mr-3"
+              >
+                🔗
+              </a>
           </div>
+          </div>
+        </div>
+      </div>
   
           {/* Right Container */}
           <div className="flex-1 flex flex-col p-0 bg-black text-white rounded-2xl min-h-0">
@@ -440,47 +495,3 @@ export default function Home() {
   );
 }
 
-const sounds = ["a_2", "d_2", "c_2", "b_2", "e_2"].map((n) => `/sounds/${n}.mp3`);
-
-const AudioManager = ({ maxIndex }: { maxIndex: number }) => {
-  const audioRefs = useRef<HTMLAudioElement[]>([]);
-  const [elapsed, setElapsed] = useState(0);
-
-  useEffect(() => {
-    const start = Date.now();
-    const timer = setInterval(() => {
-      setElapsed(((Date.now() - start) / 1000) % 20);
-    }, 200);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    audioRefs.current.forEach((audio, idx) => {
-      if (!audio) return;
-
-      if (idx === maxIndex) {
-        if (audio.paused || Math.abs(audio.currentTime - elapsed) > 0.3) {
-          audio.currentTime = elapsed;
-          audio.play().catch(() => {});
-        }
-      } else {
-        audio.pause();
-      }
-    });
-  }, [maxIndex, elapsed]);
-
-  return (
-    <>
-      {sounds.map((src, idx) => (
-        <audio
-          key={idx}
-          src={src}
-          ref={(el) => {
-            if (el) audioRefs.current[idx] = el;
-          }}
-          preload="auto"
-        />
-      ))}
-    </>
-  );
-};
