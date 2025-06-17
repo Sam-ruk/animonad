@@ -37,6 +37,8 @@ const categoryData = [
   },
 ];
 
+const sounds = ["a_2", "d_2", "c_2", "b_2", "e_2"].map((n) => `/sounds/${n}.mp3`);
+
 function safePercentChange(current: number, prev: number): number {
   return prev === 0 ? 0 : Number(((current - prev) / prev).toFixed(2));
 }
@@ -51,6 +53,8 @@ export default function Home() {
   const [barTot, setBarTot] = useState(Array(5).fill(0));
   const [percentageBarChange, setPercentageBarChange] = useState([0.0,0.0,0.0,0.0,0.0]);
   const [latestTxs, setLatestTxs] = useState<{ hash: string; value: string }[]>([]);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRefs = useRef<HTMLAudioElement[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,9 +136,45 @@ export default function Home() {
   const maxVal = Math.max(...barTot);
   const maxIndex = barTot.findIndex((v) => v === maxVal);
 
+  useEffect(() => {
+    audioRefs.current = sounds.map((src) => {
+      const audio = new Audio(src);
+      audio.loop = true;
+      return audio;
+    });
+    return () => {
+      audioRefs.current.forEach((audio) => {
+        if (audio) {
+          audio.pause();
+          audio.src = '';
+        }
+      });
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPlaying && maxIndex >= 0 && audioRefs.current[maxIndex]) {
+      audioRefs.current.forEach((audio, idx) => {
+        if (audio && idx !== maxIndex) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+      audioRefs.current[maxIndex].play().catch((error) => {
+        console.error('Audio playback error:', error);
+      });
+    } else {
+      audioRefs.current.forEach((audio) => {
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+    }
+  }, [isPlaying, maxIndex]);
+
   return (
   <div className="flex flex-col h-screen w-full bg-black p-4">
-    <AudioManager maxIndex={maxIndex} />
 
     {/* Header */}
     <div className="w-full mb-1 p-0 bg-black">
@@ -318,6 +358,12 @@ export default function Home() {
 
                 {/* Caption */}
                 <div className="flex-shrink-0 flex justify-between items-center text-xs text-white px-4 py-2">
+                  <button
+                    onClick={() => setIsPlaying((prev) => !prev)}
+                    aria-label="Play/Pause"
+                  >
+                    <img src={isPlaying ? "/sounds/pause.png" : "/sounds/play.png"} alt="Play/Pause" className="w-13 ml-0" />
+                  </button>
                   <span className="flex-1 text-center font-bold text-lg">🌈 TPS vs Categories</span>
                   <a
                     href="https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit?gid=715484899#gid=715484899"
@@ -439,48 +485,3 @@ export default function Home() {
       </div>
   );
 }
-
-const sounds = ["a_2", "d_2", "c_2", "b_2", "e_2"].map((n) => `/sounds/${n}.mp3`);
-
-const AudioManager = ({ maxIndex }: { maxIndex: number }) => {
-  const audioRefs = useRef<HTMLAudioElement[]>([]);
-  const [elapsed, setElapsed] = useState(0);
-
-  useEffect(() => {
-    const start = Date.now();
-    const timer = setInterval(() => {
-      setElapsed(((Date.now() - start) / 1000) % 20);
-    }, 200);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    audioRefs.current.forEach((audio, idx) => {
-      if (!audio) return;
-
-      if (idx === maxIndex) {
-        if (audio.paused || Math.abs(audio.currentTime - elapsed) > 0.3) {
-          audio.currentTime = elapsed;
-          audio.play().catch(() => {});
-        }
-      } else {
-        audio.pause();
-      }
-    });
-  }, [maxIndex, elapsed]);
-
-  return (
-    <>
-      {sounds.map((src, idx) => (
-        <audio
-          key={idx}
-          src={src}
-          ref={(el) => {
-            if (el) audioRefs.current[idx] = el;
-          }}
-          preload="auto"
-        />
-      ))}
-    </>
-  );
-};
