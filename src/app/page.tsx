@@ -385,7 +385,7 @@ export default function Home() {
                   >
                     <img src={isPlaying ? "/sounds/pause.png" : "/sounds/play.png"} alt="Play/Pause" className="w-13 ml-0" />
                   </button>
-                  <span className="flex-1 text-center font-bold text-[0.6rem] sm:text-lg ">🌈 TPS vs Categories</span>
+                  <span className="flex-1 text-center font-bold text-[0.8rem] sm:text-lg ">🌈 TPS vs Categories</span>
                   <a
                     href="https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit?gid=715484899#gid=715484899"
                     target="_blank"
