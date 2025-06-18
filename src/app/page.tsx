@@ -203,7 +203,7 @@ export default function Home() {
     {/* Header */}
     <div className="w-full mb-1 p-0 bg-black">
       <div className="relative text-center mt-2">
-        <h1 className="text-1xl md:text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-500 via-purple-500 drop-shadow-[0_0_15px_rgba(200,100,255,0.6)]">
+        <h1 className="text-2xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-fuchsia-500 via-purple-500 drop-shadow-[0_0_15px_rgba(200,100,255,0.6)]">
           A N I M O N A&nbsp;  
           <span className="relative w-[3rem] h-[3rem] inline-block align-middle ml-2">
             <img
