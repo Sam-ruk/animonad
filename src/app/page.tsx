@@ -301,7 +301,7 @@ export default function Home() {
         )}
 
         {/* Graph Container */}
-        <div className="flex-grow m-2 p-3 rounded-xl bg-black/80 shadow-[0_0_30px_#9333ea80] flex flex-col h-full min-h-0">
+        <div className="flex-grow m-2 p-3 rounded-xl bg-black/80 shadow-[0_0_30px_#9333ea80] flex flex-col h-[90vh] sm:h-full min-h-0">
           <div className="flex-shrink-0 flex justify-between items-center text-white px-4 pb-2 min-h-[60px]">
             <h2 className="text-xl font-semibold"></h2>
             <a
@@ -331,7 +331,7 @@ export default function Home() {
                       <div className="relative w-full flex items-end justify-center h-full">
                         {/* Bar */}
                         <div
-                          className={`w-10 rounded-t-xl bg-gradient-to-t ${item.gradient} transition-all duration-700 ${
+                          className={`w-5 sm:w-10 rounded-t-xl bg-gradient-to-t ${item.gradient} transition-all duration-700 ${
                             isTop ? "drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] scale-105" : ""
                           }`}
                           style={{
@@ -369,7 +369,7 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="text-xs text-white font-semibold mt-2 text-center">{item.label}</div>
+                      <div className="text-[0.5rem] sm:text-xs text-white font-semibold mt-2 text-center">{item.label}</div>
                     </div>
                   );
                 })}
@@ -378,19 +378,19 @@ export default function Home() {
           </div>
 
                 {/* Caption */}
-                <div className="flex-shrink-0 flex justify-between items-center text-xs text-white px-4 py-2">
+                <div className="flex-shrink-0 flex justify-between items-center text-xs text-white px-0 py-2">
                   <button
                     onClick={() => setIsPlaying((prev) => !prev)}
                     aria-label="Play/Pause"
                   >
                     <img src={isPlaying ? "/sounds/pause.png" : "/sounds/play.png"} alt="Play/Pause" className="w-13 ml-0" />
                   </button>
-                  <span className="flex-1 text-center font-bold text-lg">🌈 TPS vs Categories</span>
+                  <span className="flex-1 lg:text-center font-bold text-[0.6rem] sm:text-lg ">🌈 TPS vs Categories</span>
                   <a
                     href="https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit?gid=715484899#gid=715484899"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-violet-400 hover:text-violet-300 transition-colors"
+                    className="text-violet-400 hover:text-violet-300 transition-colors mr-3"
                   >
                     🔗
                   </a>
