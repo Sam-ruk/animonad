@@ -369,7 +369,7 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="text-[0.5rem] sm:text-xs text-white font-semibold mt-2 text-center">{item.label}</div>
+                      <div className="text-[0.7rem] sm:text-xs text-white font-semibold mt-2 text-center">{item.label}</div>
                     </div>
                   );
                 })}
