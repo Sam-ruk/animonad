@@ -55,6 +55,8 @@ export default function Home() {
   const [latestTxs, setLatestTxs] = useState<{ hash: string; value: string }[]>([]);
   const [isPlaying, setIsPlaying] = useState(true);
   const audioRefs = useRef<HTMLAudioElement[]>([]);
+  const currentTimeRef = useRef<number>(0); // Track elapsed time
+  const soundDuration = 20;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -140,8 +142,12 @@ export default function Home() {
     audioRefs.current = sounds.map((src) => {
       const audio = new Audio(src);
       audio.loop = true;
+      audio.addEventListener('timeupdate', () => {
+        currentTimeRef.current = audio.currentTime % soundDuration;
+      });
       return audio;
     });
+
     return () => {
       audioRefs.current.forEach((audio) => {
         if (audio) {
@@ -153,23 +159,41 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (isPlaying && maxIndex >= 0 && audioRefs.current[maxIndex]) {
-      audioRefs.current.forEach((audio, idx) => {
-        if (audio && idx !== maxIndex) {
-          audio.pause();
-          audio.currentTime = 0;
-        }
-      });
-      audioRefs.current[maxIndex].play().catch((error) => {
-        console.error('Audio playback error:', error);
-      });
-    } else {
+    // Cleanup: pause all audios before the next run
+    return () => {
       audioRefs.current.forEach((audio) => {
         if (audio) {
           audio.pause();
+        }
+      });
+    };
+  }, [isPlaying, maxIndex]);
+
+  useEffect(() => {
+    if (isPlaying && maxIndex >= 0 && audioRefs.current[maxIndex]) {
+      const currentAudio = audioRefs.current[maxIndex];
+
+      audioRefs.current.forEach((audio, idx) => {
+        if (audio && idx !== maxIndex && !audio.paused) {
+          audio.pause();
           audio.currentTime = 0;
         }
       });
+
+      if (currentAudio.paused) {
+        currentAudio.currentTime = currentTimeRef.current;
+        currentAudio.play().catch((error) => {
+          console.error('Audio playback error:', error);
+        });
+      }
+    } else {
+      audioRefs.current.forEach((audio) => {
+        if (audio && !audio.paused) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+      });
+      currentTimeRef.current = 0;
     }
   }, [isPlaying, maxIndex]);
 
