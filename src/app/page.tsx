@@ -331,7 +331,7 @@ export default function Home() {
                       <div className="relative w-full flex items-end justify-center h-full">
                         {/* Bar */}
                         <div
-                          className={`w-5 sm:w-10 rounded-t-xl bg-gradient-to-t ${item.gradient} transition-all duration-700 ${
+                          className={`w-6 sm:w-10 rounded-t-xl bg-gradient-to-t ${item.gradient} transition-all duration-700 ${
                             isTop ? "drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] scale-105" : ""
                           }`}
                           style={{
