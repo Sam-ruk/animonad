@@ -198,7 +198,7 @@ export default function Home() {
   }, [isPlaying, maxIndex]);
 
   return (
-  <div className="flex flex-col h-screen w-full bg-black p-4">
+  <div className="flex flex-col h-auto sm:h-screen w-full bg-black p-4">
 
     {/* Header */}
     <div className="w-full mb-1 p-0 bg-black">
@@ -217,15 +217,16 @@ export default function Home() {
     </div>
 
     {/* Main Container */}
-    <div className="flex flex-col lg:flex-row gap-6 items-stretch min-w-0 flex-grow overflow-hidden">
+    <div className="flex flex-col sm:flex-row gap-6 items-stretch min-w-0 flex-grow overflow-hidden">
 
       {/* Left Container */}
-      <div className="flex-1 flex flex-col bg-black text-white overflow-hidden rounded-xl">
+      <div className="w-full sm:flex-1 flex flex-col bg-black text-white overflow-hidden rounded-xl">
 
-        {/* Top Metric Box */}
+        {/* Top Metrics Box */}
         {blockNumber && gasUsed && gasLimit && volume && tps && (
           <div className="m-2 p-2 rounded-xl bg-black">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+              
               {/* Block Number */}
               <div className="flex flex-col items-center space-y-1 w-full">
                 <div className="relative w-full h-6 bg-gray-950 border border-purple-400 rounded-lg overflow-hidden shadow-[0_0_8px_#a78bfa]">
@@ -313,7 +314,7 @@ export default function Home() {
           </div>
 
           {/* Bar Chart */}
-          <div className="flex-1 flex flex-col justify-end px-2 pb-4 w-full h-full">
+          <div className="w-full sm:flex-1 flex flex-col justify-end px-2 pb-4 w-full h-full">
             {barTot.every(val => val === 0) ? (
               <div className="text-white text-xs flex items-center justify-center w-full h-full">No data available</div>
             ) : (
@@ -324,10 +325,6 @@ export default function Home() {
                   const heightPercent = (value / maxValue) * (100 * (5 / 6));
                   const change = percentageBarChange?.[idx] ?? 0;
                   const isTop = value === maxValue;
-
-                  console.log(
-                    `Bar ${item.label}: value=${value}, maxValue=${maxValue}, heightPercent=${heightPercent}%`
-                  );
 
                   return (
                     <div key={idx} className="flex flex-col items-center w-20 h-full">
@@ -356,7 +353,7 @@ export default function Home() {
                             src={change >= 0 ? item.happyImg : item.sadImg}
                             alt={item.label}
                             className={`transition-all duration-500 ${
-                              isTop ? "w-16 h-16" : "w-12 h-12 opacity-80"
+                              isTop ? "w-16 h-16" : "w-12 h-12"
                             }`}
                           />
                           <div className="text-xs font-bold text-white mt-1 flex items-center space-x-1">
