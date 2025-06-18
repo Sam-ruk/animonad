@@ -301,7 +301,7 @@ export default function Home() {
         )}
 
         {/* Graph Container */}
-        <div className="flex-grow m-2 p-3 rounded-xl bg-black/80 shadow-[0_0_30px_#9333ea80] flex flex-col h-[90vh] sm:h-full min-h-0">
+        <div className="flex-grow m-2 p-3 rounded-xl bg-black/80 shadow-[0_0_30px_#9333ea80] flex flex-col h-[60vh] sm:h-full min-h-0">
           <div className="flex-shrink-0 flex justify-between items-center text-white px-4 pb-2 min-h-[60px]">
             <h2 className="text-xl font-semibold"></h2>
             <a
@@ -385,7 +385,7 @@ export default function Home() {
                   >
                     <img src={isPlaying ? "/sounds/pause.png" : "/sounds/play.png"} alt="Play/Pause" className="w-13 ml-0" />
                   </button>
-                  <span className="flex-1 lg:text-center font-bold text-[0.6rem] sm:text-lg ">🌈 TPS vs Categories</span>
+                  <span className="flex-1 text-center font-bold text-[0.6rem] sm:text-lg ">🌈 TPS vs Categories</span>
                   <a
                     href="https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit?gid=715484899#gid=715484899"
                     target="_blank"
