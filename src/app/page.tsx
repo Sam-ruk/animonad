@@ -257,7 +257,7 @@ export default function Home() {
               <div className="flex flex-col items-center space-y-1 w-full">
                 <div
                   className="relative w-full h-6 bg-gray-900 border border-pink-500 rounded-lg overflow-hidden shadow-[0_0_8px_#ec4899]"
-                  title={`⛽ ${Number(BigInt(gasUsed) / BigInt(1e6)).toLocaleString()} / ${Number(BigInt(gasLimit) / BigInt(1e6)).toLocaleString()} Mwei/s`}
+                  title={`⛽ ${Number(BigInt(gasUsed) / BigInt(1e6) * BigInt(50)).toLocaleString()} / ${Number(BigInt(gasLimit) / BigInt(1e6) * BigInt(50)).toLocaleString()} Gwei/s`}
                 >
                   <div
                     className="h-full bg-pink-500 transition-all duration-500"
@@ -272,7 +272,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="text-white text-xs mt-1">
-                  ⛽ {(BigInt(gasUsed) / BigInt(1e6)).toString()} Mwei/s
+                  ⛽ {(BigInt(gasUsed) / BigInt(1e6)  * BigInt(50)).toString()} Gwei/s
                 </div>
               </div>
 
