@@ -31,18 +31,6 @@
 
 ---
 
-## ⚖️ Tech Stack
-
-| Layer      | Tech                    |
-| ---------- | ----------------------- |
-| Backend    | Node.js, Express        |
-| Blockchain | Monad + HyperSyncClient |
-| Frontend   | Next.js                 |
-| Deployment | AWS EC2                 |
-| Infra      | NGINX, Let's Encrypt    |
-
----
-
 ### 📦 Installation Steps
 
 #### 1. Clone the repository
