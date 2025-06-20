@@ -2,7 +2,7 @@
 
 **Animonad** is a real-time Monad blockchain analytics dashboard. It displays live transactions per second (TPS) across different DApp categories: **NFTs**, **Gaming**, **Social**, and **DeFi**.
 
-Backend deployed at [samkdev.xyz/api/data](https://samkdev.xyz/api/data), Animonad features a robust **Node.js + Express** backend powered by **HyperSync**, and a responsive **Next.js** frontend.
+Backend deployed at on AWS EC2, accessible via [samkdev.xyz/api/data](https://samkdev.xyz/api/data), Animonad features a robust **Node.js + Express** backend powered by **HyperSync**, and a responsive **Next.js** frontend.
 
 ---
 
