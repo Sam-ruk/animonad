@@ -2,22 +2,17 @@
 
 **Animonad** is a real-time Monad blockchain analytics dashboard. It displays live transactions per second (TPS) across different DApp categories: **NFTs**, **Gaming**, **Social**, and **DeFi**.
 
-Backend deployed at on **AWS EC2**, accessible via [samkdev.xyz/api/data](https://samkdev.xyz/api/data), powered by **HyperSync**, and a responsive **Next.js** frontend.
-
 ---
 
-## 🌎 Key Features
+### 🚀 Backend 
 
-### 🚀 Backend
-
-* **Platform**: Deployed on **AWS EC2**.
+* **Platform**: Deployed on **AWS EC2** accessible via [samkdev.xyz/api/data](https://samkdev.xyz/api/data).
 * **Proxy + SSL**: Secured via **NGINX** reverse proxy and **Let's Encrypt SSL**.
-* **Data Source**: Queries [HyperSync](https://monad-testnet.hypersync.xyz) every 1 second.
+* **Data Source**: Queries Envio [HyperSync](https://monad-testnet.hypersync.xyz) every 1 second.
 * **Data Handling**:
   * Fetches the latest 2 blocks
   * Filters only successful transactions
   * Extracts and counts DApp categories based on:
-
     * `to`/`from` contract matches using [protocols.csv](https://github.com/monad-developers/protocols/blob/main/protocols.csv)
     * Function signatures (`input.slice(0, 10)`) from [function signatures sheet](https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit#gid=45694431)
     * Kizzy deposits tracked using specific `log.address`
@@ -42,8 +37,8 @@ Backend deployed at on **AWS EC2**, accessible via [samkdev.xyz/api/data](https:
 | ---------- | ----------------------- |
 | Backend    | Node.js, Express        |
 | Blockchain | Monad + HyperSyncClient |
-| Frontend   | Next.js (React)         |
-| Deployment | AWS EC2 (Ubuntu)        |
+| Frontend   | Next.js                 |
+| Deployment | AWS EC2                 |
 | Infra      | NGINX, Let's Encrypt    |
 
 ---
@@ -53,7 +48,7 @@ Backend deployed at on **AWS EC2**, accessible via [samkdev.xyz/api/data](https:
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<YourUsername>/animonad.git
+git clone https://github.com/Sam-ruk/animonad.git
 cd animonad
 ```
 
@@ -80,7 +75,7 @@ npm run dev
 
 ## 🚀 Future Plans
 
-* More dapps and protocols to be added soon.
+* More dapps and protocols to be added.
 * Support for different ERC20 tokens while viewing the latest TXs.
 
 ---
