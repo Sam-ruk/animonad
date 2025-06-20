@@ -10,21 +10,21 @@
 * **Proxy + SSL**: Secured via **NGINX** reverse proxy and **Let's Encrypt SSL**.
 * **Data Source**: Queries Envio [HyperSync](https://monad-testnet.hypersync.xyz) every 1 second.
 * **Data Handling**:
-  * Fetches the latest 2 blocks
-  * Filters only successful transactions
+  * Fetches the latest 2 blocks.
+  * Filters only successful transactions.
   * Extracts and counts DApp categories based on:
     * `to`/`from` contract matches using [protocols.csv](https://github.com/monad-developers/protocols/blob/main/protocols.csv)
     * Function signatures (`input.slice(0, 10)`) from [function signatures sheet](https://docs.google.com/spreadsheets/d/11vji0UhVjwzCRdvb8TXzBo5jSl0X_i-p0xP5rRgjui4/edit#gid=45694431)
     * Kizzy deposits tracked using specific `log.address`
 * **Endpoints**:
-  * `GET /api/data` - Returns block metrics, categorized TX counts, and recent TX list
+  * `GET /api/data` - Returns block metrics, categorized TX counts, and recent TX list.
 
 ### 🔄 Frontend
 
 * **Framework**: Built with **Next.js**
-* **Realtime Fetch**: Pulls fresh data from `/api/data` every second
+* **Realtime Fetch**: Pulls fresh data from `/api/data` every second.
 * **Visuals**:
-  * Dynamic charts for DApp category TPS.
+  * Dynamic bar chart for DApp category TPS.
   * Realtime block stats: block number, gas used, total volume, TPS.
   * Leaderboard for most active DApps.
   * List of latest transactions.
