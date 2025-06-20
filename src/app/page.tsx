@@ -280,7 +280,7 @@ export default function Home() {
               <div className="flex flex-col items-center space-y-1 w-full">
                 <div
                   className="relative w-full h-6 bg-gray-900 border border-lime-400 rounded-lg overflow-hidden shadow-[0_0_8px_#84cc16]"
-                  title={`⚡ ${tps.toLocaleString()} TPS / 10,000`}
+                  title={`⚡ ${tps.toLocaleString()} / 10,000 TPS`}
                 >
                   <div
                     className="h-full bg-lime-400 transition-all duration-500"
