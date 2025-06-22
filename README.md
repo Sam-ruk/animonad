@@ -2,7 +2,7 @@
 
 **Animonad** is a real-time Monad blockchain analytics dashboard. It displays live transactions per second (TPS) across different DApp categories: **NFTs**, **Gaming**, **Social**, and **DeFi**.
 
-**Link**: animonad.vercel.app
+**Link**: [animonad.vercel.app](https://animonad.vercel.app)
 
 ---
 
